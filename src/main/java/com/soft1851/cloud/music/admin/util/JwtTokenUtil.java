@@ -4,10 +4,13 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.soft1851.cloud.music.admin.common.ResultCode;
+import com.soft1851.cloud.music.admin.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName JwtTokenUtil
@@ -29,10 +32,11 @@ public class JwtTokenUtil {
     public static String getToken(final String userId, final String userRole, Date expiresAt) {
         String token = null;
         try {
+            log.info("传过来的role:" + userRole);
             token = JWT.create()
                     .withIssuer("auth0")
                     .withClaim("userId", userId)
-                    .withClaim("userRole", userRole)
+                    .withClaim("roles", userRole)
                     .withExpiresAt(expiresAt)
                     // 使用了HMAC256加密算法, mySecret是用来加密数字签名的密钥
                     .sign(Algorithm.HMAC256("mySecret"));
@@ -71,7 +75,11 @@ public class JwtTokenUtil {
      * @return String
      */
     public static String getUserId(String token) {
-        return deToken(token).getClaim("userId").asString();
+        String userId = deToken(token).getClaim("userId").asString();
+        if(userId != null){
+            return userId;
+        }
+        throw new CustomException("token中的UserId获取异常", ResultCode.DATA_IS_WRONG);
     }
 
     /**
@@ -81,7 +89,7 @@ public class JwtTokenUtil {
      * @return String
      */
     public static String getUserRole(String token) {
-        return deToken(token).getClaim("userRole").asString();
+        return deToken(token).getClaim("roles").asString();
     }
 
     /**
@@ -95,7 +103,7 @@ public class JwtTokenUtil {
     }
 
     public static void main(String[] args) {
-        String token = getToken("2000100193", "admin", new Date(System.currentTimeMillis() + 10L * 1000L));
+        /*String token = getToken("2000100193", "admin", new Date(System.currentTimeMillis() + 10L * 1000L));
         System.out.println(token);
         while (true) {
             boolean flag = isExpiration(token);
@@ -109,7 +117,7 @@ public class JwtTokenUtil {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 
     }
 

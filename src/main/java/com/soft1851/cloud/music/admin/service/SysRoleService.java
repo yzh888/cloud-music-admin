@@ -19,8 +19,15 @@ public interface SysRoleService extends IService<SysRole> {
     /**
      * 用户角色信息，及该角色的权限信息
      * @param roleId
-     * @param name
      * @return
      */
-    Map<String, Object> getRoleMenuByRoleId(int roleId, String name);
+    Map<String, Object> getRoleMenuByRoleId(int roleId);
+
+    /**
+     * 校验角色是否正确
+     * @param roles
+     * @param roleId
+     * @return
+     */
+    boolean checkRole(List<SysRole> roles, int roleId);
 }

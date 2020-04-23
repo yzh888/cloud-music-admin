@@ -1,11 +1,14 @@
 package com.soft1851.cloud.music.admin.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -41,7 +44,7 @@ public class SongList extends Model<SongList> {
     /**
      * 封面
      */
-    @TableField("thumbnail")
+    @JsonIgnore
     private String thumbnail;
 
     /**
@@ -65,18 +68,21 @@ public class SongList extends Model<SongList> {
     /**
      * 评论数
      */
+    @JsonIgnore
     @TableField("comment_count")
     private Integer commentCount;
 
     /**
      * 删除标志
      */
+    @JsonIgnore
     @TableField("delete_flag")
     private Integer deleteFlag;
 
     /**
      * 修改时间
      */
+    @JsonIgnore
     @TableField("update_time")
     private LocalDateTime updateTime;
 
@@ -89,8 +95,8 @@ public class SongList extends Model<SongList> {
     /**
      * 播放量
      */
-    @TableField("play_counts")
-    private Integer playCounts;
+    @TableField("plays_counts")
+    private Integer playsCounts;
 
 
     @Override

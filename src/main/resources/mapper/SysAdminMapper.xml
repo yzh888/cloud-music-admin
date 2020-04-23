@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.cloud.music.admin.mapper.SysAdminMapper">
 
     <select id="getAdminRoleByAdminName" parameterType="String" resultType="map">
-        SELECT t2.role_name, t1.role_id, t1.name
+        SELECT t2.role_name, t1.role_id
         FROM role_admin t1
                  LEFT JOIN sys_role t2 ON t2.role_id = t1.role_id
         WHERE t1.name = #{name}

@@ -36,6 +36,7 @@ public class SysAdminController {
      */
     @PostMapping("/login")
     public ResponseResult login(@RequestBody SignDto signDto) {
+        log.info(signDto.getName());
         return ResponseResult.success(sysAdminService.sign(signDto));
     }
 

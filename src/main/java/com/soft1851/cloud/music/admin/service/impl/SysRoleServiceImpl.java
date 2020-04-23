@@ -36,24 +36,28 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     private RoleMenuMapper roleMenuMapper;
 
     @Override
-    public Map<String, Object> getRoleMenuByRoleId(int roleId, String name) {
-        QueryWrapper<SysAdmin> wrapper = new QueryWrapper<>();
+    public Map<String, Object> getRoleMenuByRoleId(int roleId) {
         Map<String, Object> data = new HashMap<>();
-        wrapper.eq("name", name)
-                .select("id","name", "avatar");
-        //获取用户信息
-        Map<String, Object> map = adminMapper.selectMaps(wrapper).get(0);
         // 根据角色id查询角色信息
         List<Map<String, Object>> maps = roleMenuMapper.getParentMenuByRoleId(roleId);
         for (Map<String, Object> map1 : maps) {
             map1.remove("role_id");
             map1.remove("menu_id");
         }
-        if (map != null) {
-            data.put("user", map);
+        if (maps != null) {
             data.put("permissions", maps);
             return data;
         }
         throw new CustomException("数据查找异常", ResultCode.DATA_IS_WRONG);
+    }
+
+    @Override
+    public boolean checkRole(List<SysRole> roles, int roleId) {
+        for (SysRole sysRole : roles) {
+            if (roleId == sysRole.getRoleId()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

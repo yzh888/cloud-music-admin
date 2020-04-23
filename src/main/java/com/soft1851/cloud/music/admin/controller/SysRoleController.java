@@ -5,6 +5,7 @@ import com.soft1851.cloud.music.admin.common.ResponseResult;
 import com.soft1851.cloud.music.admin.service.RoleAdminService;
 import com.soft1851.cloud.music.admin.service.RoleMenuService;
 import com.soft1851.cloud.music.admin.service.SysRoleService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,6 +26,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/sysRole")
+@Slf4j
 public class SysRoleController {
     @Resource
     private RoleAdminService roleAdminService;
@@ -31,7 +34,7 @@ public class SysRoleController {
     private SysRoleService sysRoleService;
 
     @GetMapping(value = "/list")
-    public ResponseResult getRoleMenuByRoleId(@Param("roleId") int roleId, @Param("name") String name) {
-        return ResponseResult.success(sysRoleService.getRoleMenuByRoleId(roleId, name));
+    public Map<String, Object> getRoleMenuByRoleId(@Param("roleId") int roleId) {
+        return sysRoleService.getRoleMenuByRoleId(roleId);
     }
 }

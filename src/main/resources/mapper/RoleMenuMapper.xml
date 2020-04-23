@@ -6,6 +6,7 @@
     <resultMap id="menuMap" type="map">
         <collection property="subMenus" column="{parentId=menu_id, roleId=role_id}" select="getChildMenuByRoleId" />
     </resultMap>
+
     <select id="getParentMenuByRoleId" resultMap="menuMap">
         SELECT t1.title, t1.icon, t1.path, t2.role_id, t2.menu_id
         FROM role_menu t2
@@ -14,10 +15,11 @@
           AND t1.parent_id = 0
         ORDER BY t1.sort
     </select>
+
     <!--根据父类id及角色id查询子类权限-->
-    <select id="getChildMenuByRoleId" resultType="map">
-        SELECT t1.title, t1.icon, t1.path, t2.permissions
-        FROM role_menu t2
+    <select id="getChildMenuByRoleId" resultMap="menuMap">
+        SELECT t1.title, t1.icon, t1.path, t2.permissions, t2.menu_id,
+        t2.role_id FROM role_menu t2
                  LEFT JOIN sys_menu t1 on t2.menu_id = t1.menu_id
         WHERE t2.role_id = #{roleId} AND t1.parent_id = #{parentId}
           AND t1.menu_id=t2.menu_id

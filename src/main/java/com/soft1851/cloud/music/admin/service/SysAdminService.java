@@ -22,7 +22,7 @@ public interface SysAdminService extends IService<SysAdmin> {
      * @param signDto
      * @return
      */
-    String sign(SignDto signDto);
+    Map<String, Object> sign(SignDto signDto);
 
     /**
      * 通过账号获取用户信息
