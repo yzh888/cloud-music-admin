@@ -27,6 +27,8 @@ spring:
       connection-timeout: 30000
       # 连接测试查询语句
       connection-test-query: SELECT 1
+
+
   redis:
     database: 0
     password:
@@ -51,3 +53,6 @@ mybatis-plus:
       id-type: auto
       #开启驼峰式转换
       table-underline: true
+      #字段策略
+      field-strategy: not_empty
+      type: mysql

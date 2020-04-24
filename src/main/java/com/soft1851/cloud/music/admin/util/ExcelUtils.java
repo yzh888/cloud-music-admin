@@ -1,15 +1,18 @@
 package com.soft1851.cloud.music.admin.util;
 
+import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
+import com.alibaba.fastjson.JSONArray;
 import com.soft1851.cloud.music.admin.common.ResultCode;
+import com.soft1851.cloud.music.admin.entity.Song;
 import com.soft1851.cloud.music.admin.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.*;
 
 /**
@@ -69,5 +72,80 @@ public class ExcelUtils {
         writer.flush(response.getOutputStream());
         // 关闭writer，释放内存
         writer.close();
+    }
+    //下载模板
+    public static void downloadModel(HttpServletResponse response, Map<String, String> map, String title){
+        List<Map<String, String>> list = new ArrayList<>();
+        Map<String, String> map1 = new LinkedHashMap<>();
+        map1.put("song_name","句号");
+        map1.put("singer", "G.E.M.邓紫棋");
+        map1.put("duration", "03:55");
+        map1.put("thumbnail", "http://ww1.sinaimg.cn/large/0084EtCNgy1ge52ciinlfj30c50c9k36.jpg");
+        map1.put("url", "http://music.163.com/song/media/outer/url?id=1405283464.mp3");
+        map1.put("lyric", "暂无");
+        list.add(map1);
+        // 通过工具类创建writer
+        ExcelWriter writer = ExcelUtil.getWriter(true);
+        //自定义标题别名
+        Set<Map.Entry<String, String>> entries = map.entrySet();
+        //迭代器遍历数据
+        Iterator<Map.Entry<String, String>> iterator = entries.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry<String, String> next = iterator.next();
+            //自定义表头
+            writer.addHeaderAlias(next.getKey(), next.getValue());
+        }
+
+        // 合并单元格后的标题行，使用默认标题样式
+        writer.write(list);
+        //out为OutputStream，需要写出到的目标流
+        try {
+            writer.flush(response.getOutputStream(), true);
+        } catch (IOException e) {
+            log.info("歌单导出异常");
+            throw new CustomException("歌单数据导出异常", ResultCode.DATABASE_EXPORT_ERROR);
+        }
+        // 关闭writer，释放内存
+        writer.close();
+    }
+    //批量导入歌曲
+    public static List<Song> importExcel(File file){
+        List<Song> songs = new ArrayList<>();
+//        File file = new File("D:\\text.xls");
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(file);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        ExcelReader reader = ExcelUtil.getReader(inputStream, "sheet1");
+        List<List<Object>> read = reader.read(1, reader.getRowCount());
+        for (List<Object> objects : read) {
+            /*String a = objects.get(0).toString();
+            System.out.println(a);*/
+            Song song = Song.builder()
+                    .songName(objects.get(0).toString())
+                    .songId(UUID.randomUUID().toString().replace("-", ""))
+                    .sortId("0")
+                    .singer(objects.get(1).toString())
+                    .duration(objects.get(2).toString())
+                    .thumbnail(objects.get(3).toString())
+                    .url(objects.get(4).toString())
+                    .lyric(objects.get(5).toString())
+                    .commentCount(0)
+                    .playCount(0)
+                    .deleteFlag("0")
+                    .updateTime(LocalDateTime.now())
+                    .createTime(LocalDateTime.now())
+                    .build();
+            songs.add(song);
+        }
+        return songs;
+    }
+
+    public static void main(String[] args) {
+//        importExcel();
+        File file = new File("D:\\Downloads\\Chrome\\model.xlsx");
+        System.out.println(importExcel(file));
     }
 }

@@ -51,27 +51,28 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
 
     @Override
     public List<Map<String, Object>> getByType() {
-//        Page<Map<String, Object>> page = new Page<>(1, 5);
         QueryWrapper<SongList> wrapper = new QueryWrapper<>();
+        //根据type字段进行分组，按照plays_counts进行降序排序
         wrapper.select("type").groupBy("type").orderByDesc("plays_counts");
         List<Map<String, Object>> maps = songListMapper.selectMaps(wrapper);
         for (Map<String, Object> map : maps) {
             if ("0".equals(map.get("type"))) {
-                map.remove("type");
+                list().remove(map);
             }else {
                 QueryWrapper<SongList> wrapper1 = new QueryWrapper<>();
+                //根据父类的type类型查询属于该类型的数据
                 wrapper1.orderByDesc("plays_counts").eq("type", map.get("type"));
                 List<Map<String, Object>> songLists = songListMapper.selectMaps(wrapper1);
                 map.put("child", songLists);
             }
         }
-//        IPage<Map<String, Object>> iPage = songListMapper.selectMapsPage(page, wrapper);
         return maps;
     }
 
     @Override
     public List<SongList> blurSelect(String field) {
         QueryWrapper<SongList> wrapper = new QueryWrapper<>();
+        //like = like %变量%, leftLike = like %变量 rightLike = like 变量%
         wrapper.like("song_list_name", field)
                 .or().like("type", field);
         return songListMapper.selectList(wrapper);
