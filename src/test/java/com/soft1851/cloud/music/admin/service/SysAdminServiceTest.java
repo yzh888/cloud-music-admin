@@ -1,13 +1,11 @@
 package com.soft1851.cloud.music.admin.service;
 
-import com.soft1851.cloud.music.admin.dto.SignDto;
+import com.soft1851.cloud.music.admin.domain.dto.SignDto;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Description TODO
@@ -26,11 +24,11 @@ class SysAdminServiceTest {
     @Test
     void sign() {
         SignDto signDto = SignDto.builder()
-                .name("123456")
+                .name("soft1851")
                 .password("123456")
                 .verifyCode("123456")
                 .build();
-        System.out.println(sysAdminService.getAdminRoleByAdminName("mqxu"));;
+        System.out.println(sysAdminService.getAdminRoleByAdminName("soft1851"));;
 
     }
 }

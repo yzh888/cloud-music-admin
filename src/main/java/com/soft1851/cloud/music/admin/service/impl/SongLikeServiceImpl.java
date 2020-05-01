@@ -1,6 +1,6 @@
 package com.soft1851.cloud.music.admin.service.impl;
 
-import com.soft1851.cloud.music.admin.entity.SongLike;
+import com.soft1851.cloud.music.admin.domain.entity.SongLike;
 import com.soft1851.cloud.music.admin.mapper.SongLikeMapper;
 import com.soft1851.cloud.music.admin.service.SongLikeService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

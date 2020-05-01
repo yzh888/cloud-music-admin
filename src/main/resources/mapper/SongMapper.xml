@@ -3,7 +3,7 @@
 <mapper namespace="com.soft1851.cloud.music.admin.mapper.SongMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.soft1851.cloud.music.admin.entity.Song">
+    <resultMap id="BaseResultMap" type="com.soft1851.cloud.music.admin.domain.entity.Song">
         <id column="song_id" property="songId" />
         <result column="song_name" property="songName" />
         <result column="sort_id" property="sortId" />
@@ -20,7 +20,7 @@
         <result column="create_time" property="createTime" />
     </resultMap>
 
-    <select id="getSongByTimeParagraph" resultType="com.soft1851.cloud.music.admin.entity.Song" >
+    <select id="getSongByTimeParagraph" resultType="com.soft1851.cloud.music.admin.domain.entity.Song" >
         SELECT * FROM song
         WHERE 1=1
         <if test="timeDto.yesterday !=null">

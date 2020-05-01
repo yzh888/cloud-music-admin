@@ -1,4 +1,4 @@
-package com.soft1851.cloud.music.admin.entity;
+package com.soft1851.cloud.music.admin.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -21,45 +21,57 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("role_menu")
-public class RoleMenu extends Model<RoleMenu> {
+@TableName("sys_menu")
+public class SysMenu extends Model<SysMenu> {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id;
-
-    /**
-     * 角色id
-     */
-    @TableField("role_id")
-    private Integer roleId;
-
-    /**
-     * 资源id
-     */
-    @TableField("menu_id")
+    @TableId(value = "menu_id", type = IdType.AUTO)
     private Integer menuId;
 
     /**
-     * 权限父类id
+     * 父级资源id，目录的parent_id为0
      */
-    @TableField("menu_parent_id")
-    private Integer menuParentId;
+    @TableField("parent_id")
+    private Integer parentId;
 
     /**
-     * 角色对资源的细粒度按钮权限
+     * 资源类型：1 目录  2 菜单  3 按钮
      */
-    @TableField("permissions")
-    private String permissions;
+    @TableField("type")
+    private Integer type;
+
+    /**
+     * 资源名称
+     */
+    @TableField("title")
+    private String title;
+
+    /**
+     * 资源url
+     */
+    @TableField("path")
+    private String path;
+
+    /**
+     * 资源图标
+     */
+    @TableField("icon")
+    private String icon;
+
+    /**
+     * 排序号
+     */
+    @TableField("sort")
+    private Integer sort;
 
 
     @Override
     protected Serializable pkVal() {
-        return this.id;
+        return this.menuId;
     }
 
 }

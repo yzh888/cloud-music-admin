@@ -1,4 +1,4 @@
-package com.soft1851.cloud.music.admin.entity;
+package com.soft1851.cloud.music.admin.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import java.time.LocalDateTime;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -21,43 +19,30 @@ import lombok.experimental.Accessors;
  * @since 2020-04-21
  */
 @Data
-@Builder
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("sys_admin")
-public class SysAdmin extends Model<SysAdmin> {
+@TableName("song_list_music")
+public class SongListMusic extends Model<SongListMusic> {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 主键
+     * id
      */
     @TableId("id")
     private String id;
 
     /**
-     * 用户名
+     * 歌曲歌单id
      */
-    @TableField("name")
-    private String name;
+    @TableField("song_list_id")
+    private String songListId;
 
     /**
-     * 密码
+     * 歌曲id
      */
-    @TableField("password")
-    private String password;
-
-    /**
-     * 加密盐
-     */
-    @TableField("salt")
-    private String salt;
-
-    /**
-     * 头像
-     */
-    @TableField("avatar")
-    private String avatar;
+    @TableField("song_id")
+    private String songId;
 
     /**
      * 创建时间
@@ -72,10 +57,10 @@ public class SysAdmin extends Model<SysAdmin> {
     private LocalDateTime updateTime;
 
     /**
-     * 账户状态：0 禁用 1 启用
+     * 榜单排名
      */
-    @TableField("status")
-    private Integer status;
+    @TableField("ratio")
+    private Integer ratio;
 
 
     @Override

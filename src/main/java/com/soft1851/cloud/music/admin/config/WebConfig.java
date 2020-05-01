@@ -10,7 +10,7 @@ import javax.annotation.Resource;
 
 /**
  * @Description TODO
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/21
  * @Version 1.0
  */
@@ -32,5 +32,6 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/static/**");*/
         //验证码拦截器，拦截登录接口
         registry.addInterceptor(loginInterceptor).addPathPatterns("/sysAdmin/login");
+        registry.addInterceptor(tokenInterceptor).addPathPatterns("/sysRole").excludePathPatterns("**").excludePathPatterns("/static/**");
     }
 }

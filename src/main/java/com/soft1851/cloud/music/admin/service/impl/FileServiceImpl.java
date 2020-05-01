@@ -1,7 +1,7 @@
 package com.soft1851.cloud.music.admin.service.impl;
 
 import com.soft1851.cloud.music.admin.common.ResultCode;
-import com.soft1851.cloud.music.admin.entity.Song;
+import com.soft1851.cloud.music.admin.domain.entity.Song;
 import com.soft1851.cloud.music.admin.exception.CustomException;
 import com.soft1851.cloud.music.admin.service.FileService;
 import com.soft1851.cloud.music.admin.service.SongService;
@@ -16,7 +16,7 @@ import java.util.Map;
 
 /**
  * @Description TODO
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/22
  * @Version 1.0
  */

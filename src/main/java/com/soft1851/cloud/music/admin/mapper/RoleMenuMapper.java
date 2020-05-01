@@ -1,6 +1,6 @@
 package com.soft1851.cloud.music.admin.mapper;
 
-import com.soft1851.cloud.music.admin.entity.RoleMenu;
+import com.soft1851.cloud.music.admin.domain.entity.RoleMenu;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 import java.util.List;
@@ -11,7 +11,7 @@ import java.util.Map;
  *  Mapper 接口
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 public interface RoleMenuMapper extends BaseMapper<RoleMenu> {

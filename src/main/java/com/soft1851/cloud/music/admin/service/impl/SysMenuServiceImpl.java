@@ -1,6 +1,6 @@
 package com.soft1851.cloud.music.admin.service.impl;
 
-import com.soft1851.cloud.music.admin.entity.SysMenu;
+import com.soft1851.cloud.music.admin.domain.entity.SysMenu;
 import com.soft1851.cloud.music.admin.mapper.SysMenuMapper;
 import com.soft1851.cloud.music.admin.service.SysMenuService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
  *  服务实现类
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 @Service

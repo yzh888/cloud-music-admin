@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @ClassName CorsConfig
  * @Description CorsConfig
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/15
  * @Version 1.0
  */

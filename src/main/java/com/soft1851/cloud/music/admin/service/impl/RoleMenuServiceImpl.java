@@ -1,9 +1,8 @@
 package com.soft1851.cloud.music.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.soft1851.cloud.music.admin.entity.RoleAdmin;
-import com.soft1851.cloud.music.admin.entity.RoleMenu;
-import com.soft1851.cloud.music.admin.entity.SysAdmin;
+import com.soft1851.cloud.music.admin.domain.entity.RoleMenu;
+import com.soft1851.cloud.music.admin.domain.entity.SysAdmin;
 import com.soft1851.cloud.music.admin.mapper.RoleAdminMapper;
 import com.soft1851.cloud.music.admin.mapper.RoleMenuMapper;
 import com.soft1851.cloud.music.admin.mapper.SysAdminMapper;
@@ -21,7 +20,7 @@ import java.util.Map;
  *  服务实现类
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 @Service

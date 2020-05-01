@@ -9,16 +9,16 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
  * @Description TODO
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/23
  * @Version 1.0
  */
-@EnableTransactionManagement
-@Configuration
-public class MybatisPlusConfig {
-
-    @Bean
-    public PaginationInterceptor paginationInterceptor() {
-        return new PaginationInterceptor();
-    }
-}
+//@EnableTransactionManagement
+//@Configuration
+//public class MybatisPlusConfig {
+//
+//    @Bean
+//    public PaginationInterceptor paginationInterceptor() {
+//        return new PaginationInterceptor();
+//    }
+//}

@@ -1,14 +1,11 @@
 package com.soft1851.cloud.music.admin.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
-import com.soft1851.cloud.music.admin.common.ResponseResult;
 import com.soft1851.cloud.music.admin.common.ResultCode;
-import com.soft1851.cloud.music.admin.dto.SignDto;
 import com.soft1851.cloud.music.admin.exception.CustomException;
 import com.soft1851.cloud.music.admin.handler.RequestWrapper;
 import com.soft1851.cloud.music.admin.service.RedisService;
 import lombok.extern.slf4j.Slf4j;
-import netscape.javascript.JSObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
@@ -18,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  * @Description TODO
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/21
  * @Version 1.0
  */

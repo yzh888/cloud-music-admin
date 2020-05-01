@@ -3,13 +3,12 @@ package com.soft1851.cloud.music.admin.service.impl;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.soft1851.cloud.music.admin.common.ResultCode;
-import com.soft1851.cloud.music.admin.dto.SignDto;
-import com.soft1851.cloud.music.admin.entity.RoleAdmin;
-import com.soft1851.cloud.music.admin.entity.SysAdmin;
-import com.soft1851.cloud.music.admin.entity.SysRole;
+import com.soft1851.cloud.music.admin.domain.dto.SignDto;
+import com.soft1851.cloud.music.admin.domain.entity.SysAdmin;
+import com.soft1851.cloud.music.admin.domain.entity.SysRole;
 import com.soft1851.cloud.music.admin.exception.CustomException;
-import com.soft1851.cloud.music.admin.mapper.RoleAdminMapper;
 import com.soft1851.cloud.music.admin.mapper.SysAdminMapper;
+import com.soft1851.cloud.music.admin.service.RedisService;
 import com.soft1851.cloud.music.admin.service.SysAdminService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.soft1851.cloud.music.admin.util.JwtTokenUtil;
@@ -25,7 +24,7 @@ import java.util.*;
  *  服务实现类
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 @Service
@@ -33,6 +32,8 @@ import java.util.*;
 public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> implements SysAdminService {
     @Resource
     private SysAdminMapper sysAdminMapper;
+    @Resource
+    private RedisService redisService;
 
     @Override
     public Map<String, Object> sign(SignDto signDto) {
@@ -53,10 +54,13 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
                     .build();
             roles.add(sysRole);
         }
+
+        //将私钥存入redis，在后面JWT拦截器中可以取出来对客户端请求头中的token解密
+        redisService.set(admin.getId(), admin.getSalt(), 100L);
         String password = Md5Util.getMd5(signDto.getPassword(), true, 32);
         log.info("角色字符串位：" + JSONObject.toJSONString(roles));
         //对token序列化成字符串
-        String token = JwtTokenUtil.getToken( admin.getId(), JSONObject.toJSONString(roles), new Date(System.currentTimeMillis() + 6000L * 1000));
+        String token = JwtTokenUtil.getToken(admin.getId(), JSONObject.toJSONString(roles),admin.getSalt(), new Date(System.currentTimeMillis() + 6000L * 1000L));
         if (admin.getPassword().equals(password)) {
             data.put("user", adminMap);
             data.put("roles", roles);
@@ -84,5 +88,10 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
             return maps;
         }
         throw new CustomException("用户角色查询异常", ResultCode.DATABASE_ERROR);
+    }
+
+    @Override
+    public String getToken(String adminId, String roles, String secrect, Date expiresAt) {
+        return JwtTokenUtil.getToken(adminId, roles, secrect, expiresAt);
     }
 }

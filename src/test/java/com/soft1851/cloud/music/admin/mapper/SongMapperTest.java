@@ -1,17 +1,13 @@
 package com.soft1851.cloud.music.admin.mapper;
 
-import com.soft1851.cloud.music.admin.dto.TimeDto;
-import com.soft1851.cloud.music.admin.entity.Song;
-import lombok.Data;
-import org.apache.poi.ss.formula.functions.T;
+import com.soft1851.cloud.music.admin.domain.dto.TimeDto;
+import com.soft1851.cloud.music.admin.domain.entity.Song;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * @Description TODO

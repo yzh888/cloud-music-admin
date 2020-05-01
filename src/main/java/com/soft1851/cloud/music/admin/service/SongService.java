@@ -1,8 +1,10 @@
 package com.soft1851.cloud.music.admin.service;
 
-import com.soft1851.cloud.music.admin.entity.Song;
+import com.soft1851.cloud.music.admin.domain.entity.Song;
 import com.baomidou.mybatisplus.extension.service.IService;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -10,9 +12,10 @@ import java.util.List;
  *  服务类
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
+@Validated
 public interface SongService extends IService<Song> {
 
     /**
@@ -31,11 +34,15 @@ public interface SongService extends IService<Song> {
      * 查询一段时间内
      * @return
      */
-    List<Song> getSongByDate(String flag);
+    List<Song> getSongByDate(@Valid String flag);
 
     /**
      * 批量插入
      * @param songs
      */
     void batchInsert(List<Song> songs);
+    /**
+     * 导出数据
+     */
+    void exportData();
 }

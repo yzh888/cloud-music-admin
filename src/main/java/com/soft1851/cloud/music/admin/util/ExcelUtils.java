@@ -3,9 +3,8 @@ package com.soft1851.cloud.music.admin.util;
 import cn.hutool.poi.excel.ExcelReader;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
-import com.alibaba.fastjson.JSONArray;
 import com.soft1851.cloud.music.admin.common.ResultCode;
-import com.soft1851.cloud.music.admin.entity.Song;
+import com.soft1851.cloud.music.admin.domain.entity.Song;
 import com.soft1851.cloud.music.admin.exception.CustomException;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,7 +16,7 @@ import java.util.*;
 
 /**
  * @Description 采用hutool的ExcelUtil工具类生成excel
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/22
  * @Version 1.0
  */

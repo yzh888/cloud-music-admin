@@ -1,4 +1,4 @@
-package com.soft1851.cloud.music.admin.entity;
+package com.soft1851.cloud.music.admin.domain.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -6,9 +6,8 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 /**
@@ -22,37 +21,45 @@ import lombok.experimental.Accessors;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@TableName("sys_role")
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class SysRole extends Model<SysRole> {
+@TableName("role_menu")
+public class RoleMenu extends Model<RoleMenu> {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * 主键
      */
-    @TableId(value = "role_id", type = IdType.AUTO)
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 角色id
+     */
+    @TableField("role_id")
     private Integer roleId;
 
     /**
-     * 角色名称
+     * 资源id
      */
-    @TableField("role_name")
-    private String roleName;
+    @TableField("menu_id")
+    private Integer menuId;
 
     /**
-     * 角色描述
+     * 权限父类id
      */
-    @TableField("descriiption")
-    @JsonIgnore
-    private String descriiption;
+    @TableField("menu_parent_id")
+    private Integer menuParentId;
+
+    /**
+     * 角色对资源的细粒度按钮权限
+     */
+    @TableField("permissions")
+    private String permissions;
 
 
     @Override
     protected Serializable pkVal() {
-        return this.roleId;
+        return this.id;
     }
 
 }

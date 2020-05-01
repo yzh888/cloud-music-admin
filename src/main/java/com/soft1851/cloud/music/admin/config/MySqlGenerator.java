@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * @Description TODO
- * @Author wf
+ * @Author yzh
  * @Date 2020/4/21
  * @Version 1.0
  */
@@ -79,7 +79,7 @@ public class MySqlGenerator {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setDriverName("com.mysql.jdbc.Driver")
-                .setUrl("jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/db_wf?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&serverTimezone=Asia/Shanghai")
+                .setUrl("jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/db_yzh?useUnicode=true&characterEncoding=utf8&useSSL=false&autoReconnect=true&serverTimezone=Asia/Shanghai")
                 .setUsername("root")
                 .setPassword("XuNiit_#");
 

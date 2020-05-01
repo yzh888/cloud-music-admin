@@ -1,6 +1,5 @@
-package com.soft1851.cloud.music.admin.entity;
+package com.soft1851.cloud.music.admin.domain.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -12,6 +11,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * <p>
@@ -32,12 +33,14 @@ public class SongList extends Model<SongList> {
     /**
      * 歌单id
      */
+    @NotNull(message = "songListId 不能为空")
     @TableId("song_list_id")
     private String songListId;
 
     /**
      * 歌单名称
      */
+    @NotNull(message = "songListName 不能为空")
     @TableField("song_list_name")
     private String songListName;
 
@@ -50,18 +53,21 @@ public class SongList extends Model<SongList> {
     /**
      * 歌单类型
      */
+    @NotNull(message = "type 不能为空")
     @TableField("type")
     private String type;
 
     /**
      * 歌曲数
      */
+    @NotNull(message = "songCount 不能为空")
     @TableField("song_count")
     private Integer songCount;
 
     /**
      * 收藏数
      */
+    @NotNull(message = "likeCount 不能为空")
     @TableField("like_count")
     private Integer likeCount;
 

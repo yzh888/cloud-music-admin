@@ -1,33 +1,33 @@
-package com.soft1851.cloud.music.admin.entity;
+package com.soft1851.cloud.music.admin.domain.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import com.baomidou.mybatisplus.annotation.TableField;
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.soft1851.cloud.music.admin.annotation.ExcelVoAttribute;
 import lombok.*;
 import lombok.experimental.Accessors;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author wf
- * @since 2020-04-21
+ * @author mq_xu
+ * @since 2020-04-22
  */
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @TableName("song")
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class Song extends Model<Song> {
 
     private static final long serialVersionUID = 1L;
@@ -35,45 +35,54 @@ public class Song extends Model<Song> {
     /**
      * 歌曲id
      */
-    @TableId(value = "song_id", type = IdType.INPUT)
+    @NotNull(message = "SongId 不能为空")
+    @TableId("song_id")
+    @ExcelVoAttribute(name = "歌曲ID", column = 0)
     private String songId;
 
     /**
      * 歌曲名称
      */
+    @Size(max = 30)
+    @NotNull(message = "name 不能为空")
     @TableField("song_name")
+    @ExcelVoAttribute(name = "歌曲名称", column = 1)
     private String songName;
 
     /**
      * 排序id
      */
-    @JsonIgnore
     @TableField("sort_id")
     private String sortId;
 
     /**
      * 歌手
      */
+    @NotNull(message = "singer 不能为空")
     @TableField("singer")
+    @ExcelVoAttribute(name = "歌手姓名", column = 2)
     private String singer;
 
     /**
      * 时长
      */
+    @NotNull(message = "duration 不能为空")
     @TableField("duration")
+    @ExcelVoAttribute(name = "歌曲时长", column = 3)
     private String duration;
 
     /**
      * 封面图
      */
-    @JsonIgnore
     @TableField("thumbnail")
+    @ExcelVoAttribute(name = "歌曲封面图", column = 4)
     private String thumbnail;
 
     /**
      * 歌曲地址
      */
     @TableField("url")
+    @ExcelVoAttribute(name = "歌曲链接", column = 5)
     private String url;
 
     /**
@@ -85,35 +94,31 @@ public class Song extends Model<Song> {
     /**
      * 评论量
      */
-    @JsonIgnore
     @TableField("comment_count")
     private Integer commentCount;
 
     /**
      * 收藏量
      */
-    @JsonIgnore
     @TableField("like_count")
     private Integer likeCount;
 
     /**
      * 播放量
      */
-    @JsonIgnore
     @TableField("play_count")
+    @ExcelVoAttribute(name = "播放量", column = 6, isNumber = true)
     private Integer playCount;
 
     /**
      * 删除标志
      */
-    @JsonIgnore
     @TableField("delete_flag")
     private String deleteFlag;
 
     /**
      * 修改时间
      */
-    @JsonIgnore
     @TableField("update_time")
     private LocalDateTime updateTime;
 
@@ -121,6 +126,7 @@ public class Song extends Model<Song> {
      * 创建时间
      */
     @TableField("create_time")
+    @ExcelVoAttribute(name = "创建时间", column = 7, isDateTime = true)
     private LocalDateTime createTime;
 
 

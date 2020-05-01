@@ -1,9 +1,8 @@
 package com.soft1851.cloud.music.admin.mapper;
 
-import com.soft1851.cloud.music.admin.dto.TimeDto;
-import com.soft1851.cloud.music.admin.entity.Song;
+import com.soft1851.cloud.music.admin.domain.dto.TimeDto;
+import com.soft1851.cloud.music.admin.domain.entity.Song;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

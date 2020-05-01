@@ -4,12 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.soft1851.cloud.music.admin.common.ResultCode;
-import com.soft1851.cloud.music.admin.entity.SongList;
+import com.soft1851.cloud.music.admin.domain.entity.SongList;
 import com.soft1851.cloud.music.admin.exception.CustomException;
 import com.soft1851.cloud.music.admin.mapper.SongListMapper;
 import com.soft1851.cloud.music.admin.service.SongListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.soft1851.cloud.music.admin.service.SongService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -77,4 +76,9 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
                 .or().like("type", field);
         return songListMapper.selectList(wrapper);
     }
+
+   // @Override
+   // public void delete(String songListId) {
+   //     songListMapper.delete(songListId);
+   // }
 }

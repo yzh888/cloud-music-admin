@@ -20,6 +20,6 @@ class SysRoleServiceTest {
 
     @Test
     void getRoleMenuByRoleId() {
-
+        //System.out.println(sysRoleService.getRoleMenuByRoleId(1, "mqxu"));
     }
 }

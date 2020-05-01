@@ -1,6 +1,6 @@
 package com.soft1851.cloud.music.admin.service.impl;
 
-import com.soft1851.cloud.music.admin.entity.UserSongList;
+import com.soft1851.cloud.music.admin.domain.entity.UserSongList;
 import com.soft1851.cloud.music.admin.mapper.UserSongListMapper;
 import com.soft1851.cloud.music.admin.service.UserSongListService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;

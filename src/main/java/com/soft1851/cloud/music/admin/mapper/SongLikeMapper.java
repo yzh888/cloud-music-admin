@@ -1,6 +1,6 @@
 package com.soft1851.cloud.music.admin.mapper;
 
-import com.soft1851.cloud.music.admin.entity.SongLike;
+import com.soft1851.cloud.music.admin.domain.entity.SongLike;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**

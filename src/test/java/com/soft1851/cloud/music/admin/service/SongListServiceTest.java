@@ -3,7 +3,7 @@ package com.soft1851.cloud.music.admin.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.soft1851.cloud.music.admin.entity.SongList;
+import com.soft1851.cloud.music.admin.domain.entity.SongList;
 import com.soft1851.cloud.music.admin.mapper.SongListMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.annotation.Resource;
 
 import java.io.IOException;
-import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

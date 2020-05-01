@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.Map;
 
 /**
@@ -21,12 +23,13 @@ import java.util.Map;
  *  前端控制器
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 @RestController
 @RequestMapping("/sysRole")
 @Slf4j
+@Valid
 public class SysRoleController {
     @Resource
     private RoleAdminService roleAdminService;
@@ -34,7 +37,7 @@ public class SysRoleController {
     private SysRoleService sysRoleService;
 
     @GetMapping(value = "/list")
-    public Map<String, Object> getRoleMenuByRoleId(@Param("roleId") int roleId) {
+    public Map<String, Object> getRoleMenuByRoleId(@Valid @Param("roleId") @NotNull int roleId) {
         return sysRoleService.getRoleMenuByRoleId(roleId);
     }
 }

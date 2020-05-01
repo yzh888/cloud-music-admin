@@ -1,8 +1,9 @@
 package com.soft1851.cloud.music.admin.service;
 
-import com.soft1851.cloud.music.admin.entity.SysRole;
+import com.soft1851.cloud.music.admin.domain.entity.SysRole;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 public interface SysRoleService extends IService<SysRole> {
@@ -21,7 +22,7 @@ public interface SysRoleService extends IService<SysRole> {
      * @param roleId
      * @return
      */
-    Map<String, Object> getRoleMenuByRoleId(int roleId);
+    Map<String, Object> getRoleMenuByRoleId(@Valid int roleId);
 
     /**
      * 校验角色是否正确
