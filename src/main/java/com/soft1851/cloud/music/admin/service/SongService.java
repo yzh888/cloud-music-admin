@@ -15,7 +15,6 @@ import java.util.List;
  * @author yzh
  * @since 2020-04-21
  */
-@Validated
 public interface SongService extends IService<Song> {
 
     /**
@@ -34,15 +33,28 @@ public interface SongService extends IService<Song> {
      * 查询一段时间内
      * @return
      */
-    List<Song> getSongByDate(@Valid String flag);
+    List<Song> getSongByDate(String flag);
 
     /**
      * 批量插入
      * @param songs
      */
     void batchInsert(List<Song> songs);
+
     /**
-     * 导出数据
+     * 批量删除
+     * @param idList
+     */
+    void batchDelete(String idList);
+
+    /**
+     * 单个删除
+     * @param id
+     */
+    void delete(String id);
+
+    /**
+     * 导出歌曲数据
      */
     void exportData();
 }

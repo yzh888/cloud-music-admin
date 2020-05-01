@@ -11,7 +11,7 @@ import java.util.Map;
  *  服务类
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 public interface SongListService extends IService<SongList> {
@@ -41,11 +41,4 @@ public interface SongListService extends IService<SongList> {
      * @return
      */
     List<SongList> blurSelect(String filed);
-    /**
-     *
-     * 根据id删除
-     * @param songListId
-     *
-     */
-    //void delete(String songListId);
 }

@@ -26,7 +26,7 @@ public class ExcelUtil<T> {
     Class<T> clazz;
 
     /**
-     * 表头字段列表
+     * 数字单元格对象（获取类的属性）
      */
     private List<Field> fields;
 
@@ -42,7 +42,6 @@ public class ExcelUtil<T> {
 
     /**
      * 构造方法
-     *
      * @param clazz
      */
     public ExcelUtil(Class<T> clazz) {
@@ -50,38 +49,38 @@ public class ExcelUtil<T> {
     }
 
     /**
-     * 添加一条数据
+     * 一条一条数据写入
      *
-     * @param vo:需要导出的vo对象
-     * @param wb：工作簿
-     * @param sheet：工作表
-     * @param rowNum：当前行号
+     * @param vo
+     * @param wb
+     * @param sheet
+     * @param rowNum
      */
     public void addRowData(T vo, SXSSFWorkbook wb, Sheet sheet, int rowNum) {
-        //创建一行
+        //创建第一行
         Row row = sheet.createRow(rowNum);
         Field field;
         Cell cell;
-        ExcelVoAttribute attr;
+        //声明注解
+        ExcelVoAttribute attar;
+        //获取类的属性长度
         int fieldSize = fields.size();
-        // 遍历入参对象的所有属性
+        // 遍历反射获得需要导出的入参对象的所有属性
         for (int j = 0; j < fieldSize; j++) {
-            // 通过反射获得需要导出的入参对象的所有属性
+            //通过反射获得需要导出的入参对象的所有属性
             field = fields.get(j);
             // 设置实体类私有属性可访问
             field.setAccessible(true);
             // 获取所有添加了注解的属性
-            attr = field.getAnnotation(ExcelVoAttribute.class);
+            attar = field.getAnnotation(ExcelVoAttribute.class);
             // 给每个属性创建一个单元格
             cell = row.createCell(j);
             try {
-                this.setCellValue(attr, field.get(vo), wb, cell);
-                System.out.println(field.get(vo));
+                this.setCellValue(attar, field.get(vo), wb, cell);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-
     }
 
     /**
@@ -129,10 +128,10 @@ public class ExcelUtil<T> {
             }
             return decimalCellStyle;
         }
-        if (attr.isDateTime()) {
+        if(attr.isDateTime()){
             if (dateTimeCellStyle == null) {
                 dateTimeCellStyle = workbook.createCellStyle();
-                //此处设置日期时间单元格格式
+                //此设置日期时间单元格格式
                 DataFormat df = workbook.createDataFormat();
                 dateTimeCellStyle.setDataFormat(df.getFormat("yyyy-MM-dd HH:mm:ss"));
             }
@@ -142,14 +141,13 @@ public class ExcelUtil<T> {
     }
 
     /**
-     * 创建工作页Sheet
+     * 创建工作页sheet
      *
      * @param wb
      * @param sheetName
-     * @return Sheet
+     * @return
      */
     public Sheet createSheet(SXSSFWorkbook wb, String sheetName) {
-
         return wb.createSheet(sheetName);
     }
 
@@ -169,20 +167,21 @@ public class ExcelUtil<T> {
         int fieldSize = fields.size();
         row = sheet.createRow(0);
         for (int i = 0; i < fieldSize; i++) {
+//            System.out.println("表头名称：" +  attr.name());
             field = fields.get(i);
             attr = field.getAnnotation(ExcelVoAttribute.class);
             cell = CellUtil.createCell(row, i, attr.name());
             // 设置列宽，根据相应的字段名的长度等比
-             sheet.setColumnWidth(i, attr.name().getBytes().length * 400);
+            sheet.setColumnWidth(i, attr.name().getBytes().length * 400);
         }
     }
 
     /**
      * 获取输出对象字段列表，并根据注解进行字段排序
-     *
      * @return
      */
     private List<Field> getSortFields() {
+        //获取实体类中的字段并根据注解的column属性进行排序
         List<Field> fields = Arrays.stream(clazz.getDeclaredFields()).filter(x -> x.isAnnotationPresent(ExcelVoAttribute.class)).collect(Collectors.toList());
         List<Field> sortList = new ArrayList<>(fields);
         //排序
@@ -193,5 +192,4 @@ public class ExcelUtil<T> {
         }
         return sortList;
     }
-
 }

@@ -1,6 +1,8 @@
 package com.soft1851.cloud.music.admin.util;
 
+import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -11,25 +13,17 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @Version 1.0
  */
 public class ExportDataAdapter<T> {
-
-
     /**
      * 默认队列大小
      */
     private static Integer DEFAULT_SIZE = 1000;
 
-    private BlockingQueue<T> resourceQueue = null;
+    private BlockingDeque<T> resourceQueue = null;
 
     public ExportDataAdapter() {
-        this.resourceQueue = new LinkedBlockingQueue<T>(DEFAULT_SIZE);
+        this.resourceQueue = new LinkedBlockingDeque<T>(DEFAULT_SIZE);
     }
 
-
-    /**
-     * 添加数据
-     *
-     * @param data
-     */
     public void addData(T data) {
         try {
             resourceQueue.put(data);
@@ -40,7 +34,6 @@ public class ExportDataAdapter<T> {
 
     /**
      * 获取剩余数据数量
-     *
      * @return
      */
     public Integer getDataSize() {
@@ -49,7 +42,6 @@ public class ExportDataAdapter<T> {
 
     /**
      * 从队列中获取数据
-     *
      * @return
      */
     public T getData() {

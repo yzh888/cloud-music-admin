@@ -53,6 +53,7 @@ public enum ResultCode {
     /* 服务器或系统错误：50001-599999 */
     SERVER_ERROR(50000, "服务器错误，请稍后重试"),
     SYSTEM_ERROR(40001, "系统错误，请稍后重试"),
+    PARAMETER_ERROR(50002, "参数校验异常"),
 
     /* 接口错误：60001-69999 */
     INTERFACE_INNER_INVOKE_ERROR(60001, "内部系统接口调用异常"),

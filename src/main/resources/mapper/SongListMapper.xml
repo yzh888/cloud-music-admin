@@ -4,9 +4,9 @@
 
     <select id="getSongListByPage" resultType="map">
     </select>
-    <delete id="delete" parameterType="string">
-        DELETE
-        FROM song_list
-        WHERE song_list_id = #{songListId}
-    </delete>
+<!--    <delete id="delete" parameterType="string">-->
+<!--        DELETE-->
+<!--        FROM song_list-->
+<!--        WHERE song_list_id = #{songListId}-->
+<!--    </delete>-->
 </mapper>

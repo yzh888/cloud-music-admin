@@ -24,16 +24,16 @@
         SELECT * FROM song
         WHERE 1=1
         <if test="timeDto.yesterday !=null">
-           AND TO_DAYS(create_time) = TO_DAYS(NOW());
+            AND TO_DAYS(create_time) = TO_DAYS(NOW());
         </if>
         <if test="timeDto.week != null">
-          AND  YEARWEEK(date_format(create_time,'%Y-%m-%d')) = YEARWEEK(now())
+            AND  YEARWEEK(date_format(create_time,'%Y-%m-%d')) = YEARWEEK(now())
         </if>
         <if test="timeDto.month!=null">
-           AND DATE_FORMAT( create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
+            AND DATE_FORMAT( create_time, '%Y%m' ) = DATE_FORMAT( CURDATE( ) , '%Y%m' )
         </if>
         <if test="timeDto.quarter !=null">
-          AND create_time > DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+            AND create_time > DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
         </if>
 
     </select>

@@ -6,6 +6,7 @@ import com.soft1851.cloud.music.admin.exception.CustomException;
 import com.soft1851.cloud.music.admin.service.FileService;
 import com.soft1851.cloud.music.admin.service.SongService;
 import com.soft1851.cloud.music.admin.util.ExcelUtils;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @Version 1.0
  */
 @Service
+@Slf4j
 public class FileServiceImpl implements FileService {
     @Resource
     private SongService songService;
@@ -39,8 +41,10 @@ public class FileServiceImpl implements FileService {
 
     @Override
     public void importSong(File file) {
+        //获取导入的数据
         List<Song> songs = ExcelUtils.importExcel(file);
         try {
+            //批量新增
             songService.saveBatch(songs);
         }catch (Exception e){
             throw new CustomException("歌曲批量导入异常", ResultCode.DATABASE_ERROR);

@@ -15,7 +15,6 @@ import java.util.concurrent.CountDownLatch;
  */
 @Slf4j
 public class ExcelConsumer<T> implements Runnable {
-
     /**
      * 一张工作表可以容纳的最大行数
      */
@@ -106,7 +105,6 @@ public class ExcelConsumer<T> implements Runnable {
                 }
             }
         }
-        log.info("数据导出完成");
         latch.countDown();
     }
 }

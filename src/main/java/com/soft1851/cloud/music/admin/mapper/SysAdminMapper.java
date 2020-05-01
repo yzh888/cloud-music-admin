@@ -22,4 +22,10 @@ public interface SysAdminMapper extends BaseMapper<SysAdmin> {
      * @return
      */
     List<Map<String, Object>> getAdminRoleByAdminName(String name);
+
+    /**
+     * 获取所有用户信息
+     * @return
+     */
+    List<Map<String, Object>> selectAll();
 }

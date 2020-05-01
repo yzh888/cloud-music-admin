@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.file.Path;
+import java.util.UUID;
 
 /**
  * @Description TODO
@@ -45,16 +47,40 @@ public class FileController {
         ExcelUtils.exportExcel(response, songListService.selectAll(), fileService.exportSongList(), "歌单表");
     }
 
-    @PostMapping(value = "/guide")
-    public void exportResource(@RequestParam("file") MultipartFile file){
-        log.info(file.getName());
+    @PostMapping(value = "/upload")
+    public void exportResource(@RequestParam("file") MultipartFile[] files){
+        for (MultipartFile file : files) {
+            log.info("文件的响应类型" + file.getContentType());
+            log.info("获取表单中文件组件的名字" + file.getName());
+            log.info("获取上传文件的名称：" + file.getOriginalFilename());
+            log.info("文件的类型：" + String.valueOf(file.getClass()));
+            log.info("获得文件的大小：" + String.valueOf(file.getSize()));
+            log.info(String.valueOf(file.getResource()));
+            String fileName = file.getOriginalFilename();
+            assert fileName != null;
+            String suffix = fileName.substring(fileName.lastIndexOf("."));
+            log.info("后缀名：" + suffix);
+            String path = "D:\\test\\" + UUID.randomUUID().toString() +suffix;
+            Path path1 = Path.of(path);
+            try {
+                file.transferTo(path1);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            /*try {
+                file.transferTo(new File(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }*/
+        }
+        /*log.info(String.valueOf(file.getSize()));
         File file1 = FileUtil.fileConversion(file);
-        fileService.importSong(file1);
+        fileService.importSong(file1);*/
     }
 
     @GetMapping(value = "/model")
     public void downloadModel() {
-        //创建
+        //创建ServletRequestAttributes
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert attributes != null;
         //获取response响应
@@ -64,6 +90,10 @@ public class FileController {
         response.setContentType("application/vnd.ms-excel;charset=utf-8");
         //设置响应头，允许文件在浏览器中下载
         response.setHeader("Content-Disposition","attachment");
+        //在页面中显示
+        //response.setHeader("Content-Disposition","inline");
+        //在页面中下载文件，文件名为filename.jpg
+        //response.setHeader("Content-Disposition","attachment; filename=filename.jpg");
         //导出模板
         ExcelUtils.downloadModel(response, fileService.downloadSongModel(), "音乐模板");
 

@@ -36,9 +36,9 @@ public class CaptchaController {
         HttpServletResponse response = sra.getResponse();
         //生成验证码文本
         String text = defaultKaptcha.createText();
-        log.info("参数: " + name);
+        log.info("参数" + name);
         //将验证码存入redis，配置的失效时间单位是分钟
-        redisService.set(name, text, 10L);
+        redisService.set(name, text, 2L);
         log.info("验证码: " + redisService.getValue(name, String.class));
         //生成验证码图片，并通过response输出到客户端浏览器
         BufferedImage image = defaultKaptcha.createImage(text);

@@ -12,7 +12,7 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 public interface SongMapper extends BaseMapper<Song> {

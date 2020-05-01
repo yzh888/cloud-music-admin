@@ -110,18 +110,19 @@ public class ExcelUtils {
     //批量导入歌曲
     public static List<Song> importExcel(File file){
         List<Song> songs = new ArrayList<>();
-//        File file = new File("D:\\text.xls");
         InputStream inputStream = null;
         try {
+            //获取文件信息
             inputStream = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        //通过getReader方法确定读取哪个sheet中的数据
         ExcelReader reader = ExcelUtil.getReader(inputStream, "sheet1");
+        //获取总行数
         List<List<Object>> read = reader.read(1, reader.getRowCount());
         for (List<Object> objects : read) {
-            /*String a = objects.get(0).toString();
-            System.out.println(a);*/
+            //对每行数据取出构建出一个song对象
             Song song = Song.builder()
                     .songName(objects.get(0).toString())
                     .songId(UUID.randomUUID().toString().replace("-", ""))

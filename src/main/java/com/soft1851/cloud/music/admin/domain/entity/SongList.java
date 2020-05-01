@@ -12,6 +12,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -19,7 +22,7 @@ import javax.validation.constraints.NotNull;
  * 
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 @Data
@@ -33,15 +36,14 @@ public class SongList extends Model<SongList> {
     /**
      * 歌单id
      */
-    @NotNull(message = "songListId 不能为空")
     @TableId("song_list_id")
     private String songListId;
 
     /**
      * 歌单名称
      */
-    @NotNull(message = "songListName 不能为空")
     @TableField("song_list_name")
+    @NotNull(message = "歌单名不允许为空")
     private String songListName;
 
     /**
@@ -53,22 +55,21 @@ public class SongList extends Model<SongList> {
     /**
      * 歌单类型
      */
-    @NotNull(message = "type 不能为空")
     @TableField("type")
     private String type;
 
     /**
      * 歌曲数
      */
-    @NotNull(message = "songCount 不能为空")
     @TableField("song_count")
+    @Min(0)
     private Integer songCount;
 
     /**
      * 收藏数
      */
-    @NotNull(message = "likeCount 不能为空")
     @TableField("like_count")
+    @Min(0)
     private Integer likeCount;
 
     /**
@@ -76,13 +77,15 @@ public class SongList extends Model<SongList> {
      */
     @JsonIgnore
     @TableField("comment_count")
+    @Min(0)
     private Integer commentCount;
 
     /**
-     * 删除标志
+     * 删除标志 0 逻辑删  1 存在
      */
     @JsonIgnore
     @TableField("delete_flag")
+    @Max(1)
     private Integer deleteFlag;
 
     /**
@@ -90,18 +93,21 @@ public class SongList extends Model<SongList> {
      */
     @JsonIgnore
     @TableField("update_time")
+    @NotBlank(message = "时间不能为空")
     private LocalDateTime updateTime;
 
     /**
      * 创建时间
      */
     @TableField("create_time")
+    @NotBlank(message = "时间不能为空")
     private LocalDateTime createTime;
 
     /**
      * 播放量
      */
     @TableField("plays_counts")
+    @Min(0)
     private Integer playsCounts;
 
 

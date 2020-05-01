@@ -22,7 +22,7 @@ public interface SysRoleService extends IService<SysRole> {
      * @param roleId
      * @return
      */
-    Map<String, Object> getRoleMenuByRoleId(@Valid int roleId);
+    Map<String, Object> getRoleMenuByRoleId(int roleId);
 
     /**
      * 校验角色是否正确
@@ -31,4 +31,22 @@ public interface SysRoleService extends IService<SysRole> {
      * @return
      */
     boolean checkRole(List<SysRole> roles, int roleId);
+
+    /**
+     * 获取所有角色信息
+     * @return
+     */
+    List<Map<String, Object>> selectAll();
+
+    /**
+     * 新增单个角色
+     * @param role
+     */
+    void insertSingle(SysRole role);
+
+    /**
+     * 角色id
+     * @param roleId
+     */
+    void deleteSingle(int roleId);
 }

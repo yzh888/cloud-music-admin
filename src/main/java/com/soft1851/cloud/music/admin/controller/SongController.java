@@ -1,18 +1,17 @@
 package com.soft1851.cloud.music.admin.controller;
 
 
+import com.soft1851.cloud.music.admin.common.ResponseResult;
 import com.soft1851.cloud.music.admin.domain.entity.Song;
 import com.soft1851.cloud.music.admin.service.SongService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
@@ -46,5 +45,22 @@ public class SongController {
     public List<Song> getSongByTime(@Valid @Param("flag") @NotNull String flag) {
         log.info(flag);
         return songService.getSongByDate(flag);
+    }
+
+    @DeleteMapping("/many")
+    public ResponseResult batchDelete(@Valid @Param("id") @NotBlank String id) {
+        songService.batchDelete(id);
+        return ResponseResult.success();
+    }
+
+    @DeleteMapping("/single/{id}")
+    public ResponseResult singleDelete(@Valid @PathVariable @NotBlank String id) {
+        songService.delete(id);
+        return ResponseResult.success();
+    }
+
+    @GetMapping(value = "/export")
+    public void exportData() {
+        songService.exportData();
     }
 }

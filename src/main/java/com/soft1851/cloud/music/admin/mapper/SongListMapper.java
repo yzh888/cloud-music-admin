@@ -12,11 +12,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @since 2020-04-21
  */
 public interface SongListMapper extends BaseMapper<SongList> {
-    /**
-     *
-     * 根据id删除
-     * @param songListId
-     *
-     */
-    //void delete(String songListId);
+
 }

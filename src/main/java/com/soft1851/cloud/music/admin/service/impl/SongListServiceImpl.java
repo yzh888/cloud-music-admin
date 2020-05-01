@@ -76,9 +76,4 @@ public class SongListServiceImpl extends ServiceImpl<SongListMapper, SongList> i
                 .or().like("type", field);
         return songListMapper.selectList(wrapper);
     }
-
-   // @Override
-   // public void delete(String songListId) {
-   //     songListMapper.delete(songListId);
-   // }
 }

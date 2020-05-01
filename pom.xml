@@ -41,6 +41,11 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-pool2</artifactId>
         </dependency>
+        <!--springboot aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
         <!--springboot test-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -132,30 +137,47 @@
             <artifactId>xercesImpl</artifactId>
             <version>2.12.0</version>
         </dependency>
-        <!--poi-ooxml-schemas-->
-        <dependency>
-        <groupId>org.apache.poi</groupId>
-        <artifactId>poi-ooxml-schemas</artifactId>
-        <version>4.1.0</version>
-    </dependency>
-
-        <!--poi依赖，使用SXSSFWorkbook来处理大数据量Excel导出必须-->
+        <!--poi-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>4.1.2</version>
+            <version>4.1.0</version>
         </dependency>
+        <!--导入apache poi-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>4.1.2</version>
+            <version>4.1.0</version>
         </dependency>
-        <!--springboot aop-->
+        <!--poi-ooxml-schemas-->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml-schemas</artifactId>
+            <version>4.1.0</version>
         </dependency>
-
+        <!--参数校验， 普通的java-->
+        <!--<dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.6</version>
+        </dependency>-->
+        <!--springboot中的参数校验web的子依赖-->
+        <!--<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>-->
     </dependencies>
 
     <build>

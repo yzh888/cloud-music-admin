@@ -3,6 +3,9 @@ package com.soft1851.cloud.music.admin.mapper;
 import com.soft1851.cloud.music.admin.domain.entity.SysRole;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  *  Mapper 接口
@@ -13,4 +16,9 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface SysRoleMapper extends BaseMapper<SysRole> {
 
+    /**
+     * 获取所有
+     * @return
+     */
+    List<Map<String, Object>> selectAll();
 }

@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -18,7 +19,7 @@ import javax.validation.constraints.NotNull;
  * 
  * </p>
  *
- * @author wf
+ * @author yzh
  * @since 2020-04-21
  */
 @Data
@@ -35,21 +36,21 @@ public class SysRole extends Model<SysRole> {
     /**
      * 主键
      */
-    @NotNull(message = "RoleId 不能为空")
     @TableId(value = "role_id", type = IdType.AUTO)
     private Integer roleId;
 
     /**
      * 角色名称
      */
-    @NotNull(message = "roleName 不能为空")
     @TableField("role_name")
+    @NotBlank(message = "角色名称不允许为空串")
     private String roleName;
 
     /**
      * 角色描述
      */
     @TableField("descriiption")
+    @NotBlank(message = "描述字段不允许为空")
     @JsonIgnore
     private String descriiption;
 

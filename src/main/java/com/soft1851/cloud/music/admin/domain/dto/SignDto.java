@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 /**
  * @Description TODO
  * @Author wf
@@ -16,7 +19,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SignDto {
+    @NotBlank(message = "用户名不可为空串")
     private String name;
+    @NotBlank(message = "密码不可为空串")
     private String password;
+    @NotBlank(message = "验证码不可为空")
+    @Size(max = 6, message = "长度不可超过6位")
     private String verifyCode;
 }

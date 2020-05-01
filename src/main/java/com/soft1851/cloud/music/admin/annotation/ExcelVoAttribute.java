@@ -16,29 +16,26 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 public @interface ExcelVoAttribute {
     /**
-     * 导出到Excel的列名
-     *
+     * 导出Excel的列名
      * @return
      */
     public abstract String name();
 
     /**
-     * 配置列的展现顺序，如A(0),B(1)
-     *
+     * 配置实体属性在excel中的展现顺序，如name 在 A(0)
      * @return
      */
     public abstract int column();
 
     /**
-     * 是否需要数字格式展示
-     *
+     * 是否需要数字格式化
      * @return
      */
     public abstract boolean isNumber() default false;
 
     /**
-     * 是否需要日期时间格式展示
+     * 是否需要日期格式化展示
      * @return
      */
-    public abstract  boolean isDateTime() default  false;
+    public abstract boolean isDateTime() default false;
 }

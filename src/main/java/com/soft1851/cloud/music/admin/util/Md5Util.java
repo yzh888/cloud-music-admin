@@ -16,6 +16,7 @@ public class Md5Util {
      * @return String
      */
     public static String getMd5(String pwd, boolean isUpper, Integer bit) {
+
         String md5 = "";
         try {
             // 创建加密对象

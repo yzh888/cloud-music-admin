@@ -27,11 +27,8 @@ public class WebConfig implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         //拦截路径可自行配置多个 可用 ，分隔开
         //JWT拦截器，放行登录和验证码接口
-       /* registry.addInterceptor(tokenInterceptor).addPathPatterns("/**")
-                .excludePathPatterns("/sysAdmin/login", "/captcha")
-                .excludePathPatterns("/static/**");*/
+        registry.addInterceptor(tokenInterceptor).addPathPatterns("/sysRole/list");
         //验证码拦截器，拦截登录接口
         registry.addInterceptor(loginInterceptor).addPathPatterns("/sysAdmin/login");
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/sysRole").excludePathPatterns("**").excludePathPatterns("/static/**");
     }
 }

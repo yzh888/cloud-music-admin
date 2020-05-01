@@ -4,6 +4,7 @@ package com.soft1851.cloud.music.admin.controller;
 import com.soft1851.cloud.music.admin.domain.entity.SongList;
 import com.soft1851.cloud.music.admin.service.SongListService;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import java.util.List;
 import java.util.Map;
 
@@ -24,7 +26,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping(value = "/songList")
-@Valid
+@Validated
 public class SongListController {
     @Resource
     private SongListService songListService;
@@ -35,7 +37,7 @@ public class SongListController {
     }
 
     @GetMapping("/page")
-    public List<SongList> getByPage(@Param("currentPage") int currentPage, @Param("size") int size) {
+    public List<SongList> getByPage(@Valid @Param("currentPage") @Min(0) int currentPage, @Valid @Param("size") @Min(0) int size) {
         return songListService.getByPage(currentPage, size);
     }
 
@@ -48,8 +50,4 @@ public class SongListController {
     public List<Map<String, Object>> getByType(){
         return songListService.getByType();
     }
-
-    //@DeleteMapping("/delete")
-    //public void delete(@Param("songListId") String songListId) {  songListService.delete(songListId); }
-
 }

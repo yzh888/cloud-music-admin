@@ -45,32 +45,32 @@ public class TokenInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader("Authorization");
         String adminId = request.getHeader("adminId");
+        log.info("用户的id: " + adminId);
         if (token == null) {
-            log.info("### 用户未登录，请先登录 ###");
             throw new CustomException("用户未登录，请先登录", ResultCode.USER_NOT_SIGN_IN);
         } else {
-            log.info("## token= {}", token);
             String secret = redisService.getValue(adminId, String.class);
             // 认证
-                if (JwtTokenUtil.isExpiration(token, secret)) {
-                    log.info("##  token已失效  ##");
-                    // 通过自定义异常抛出token失效的信息，由全局统一处理
-                    throw new CustomException("token失效", ResultCode.USER_TOKEN_EXPIRES);
-                } else {
-                    //获取参数roleId
-                    int roleId = Integer.parseInt(request.getHeader("roleId"));
-                    //获取token中携带的roles
-                    String roles = JwtTokenUtil.getUserRole(token,secret);
-                    //将roles进行反序列化
-                    List<SysRole> maps = JSONArray.parseArray(roles, SysRole.class);
-                    //鉴权，校验token中的role是否存在用户传来的role
-                    boolean flag = sysRoleService.checkRole(maps, roleId);
-                    if (flag) {
-                        return true;
-                    }
-                    //通过认证，放行到controller层
-                    throw new JwtException("权限不足", ResultCode.PERMISSION_NO_ACCESS);
+            if (JwtTokenUtil.isExpiration(token, secret)) {
+                log.info("##  token已失效  ##");
+                // 通过自定义异常抛出token失效的信息，由全局统一处理
+                throw new CustomException("token失效", ResultCode.USER_TOKEN_EXPIRES);
+            } else {
+                //获取参数roleId
+                log.info("获取角色id: " + request.getHeader("roleId") );
+                int roleId = Integer.parseInt(request.getHeader("roleId"));
+                //获取token中携带的roles
+                String roles = JwtTokenUtil.getUserRole(token, secret);
+                //将roles进行反序列化
+                List<SysRole> maps = JSONArray.parseArray(roles, SysRole.class);
+                //鉴权，校验token中的role是否存在用户传来的role
+                boolean flag = sysRoleService.checkRole(maps, roleId);
+                if (flag) {
+                    return true;
                 }
+                //通过认证，放行到controller层
+                throw new JwtException("权限不足", ResultCode.PERMISSION_NO_ACCESS);
+            }
         }
     }
 
